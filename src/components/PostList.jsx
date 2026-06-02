@@ -33,7 +33,7 @@ const PostList = ({posts, title, remove}) => {
               timeout={500}
             >
               <div ref={itemRef}>
-                <PostItem number={index + 1} post={post} remove={remove} />
+                <PostItem post={post} remove={remove} />
               </div>
             </CSSTransition>
           );
