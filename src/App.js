@@ -10,7 +10,8 @@ import axios from "axios";
 import PostService from "./API/PostService";
 import Loader from "./components/UI/Loader/Loader";
 import { useFetching } from "./hooks/useFetching";
-import { getPageCount, getPagesArray } from "./utils/pages";
+import { getPageCount } from "./utils/pages";
+import Pagination from "./components/UI/pagination/Pagination";
 
 function App() {
   const [posts, setPosts] = useState([])
@@ -27,10 +28,6 @@ function App() {
     const totalCount = response.headers['x-total-count']
     setTotalPages(getPageCount(totalCount, limit))
   })
-
-  const pagesArray = useMemo(() => {
-    return getPagesArray(totalPages)
-  }, [totalPages])
 
   useEffect(() => {
     fetchPosts()
@@ -75,17 +72,11 @@ function App() {
             remove={removePost} 
           />
       }
-      <div className="page__wrapper">
-        {pagesArray.map(p => 
-          <span 
-            onClick={() => changePage(p)}
-            key={p} 
-            className={page === p ? 'page__current page' : 'page'}
-          >
-            {p}
-          </span>
-        )}   
-      </div>   
+      <Pagination 
+        totalPages={totalPages} 
+        page={page} 
+        changePage={changePage} 
+      />       
     </div>
   );
 }
