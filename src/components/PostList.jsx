@@ -31,9 +31,8 @@ const PostList = ({posts, title, remove}) => {
               key={post.id}
               nodeRef={itemRef}
               timeout={500}
-              classNames="post"
             >
-              <div ref={itemRef} classNames="post">
+              <div ref={itemRef}>
                 <PostItem number={index + 1} post={post} remove={remove} />
               </div>
             </CSSTransition>
